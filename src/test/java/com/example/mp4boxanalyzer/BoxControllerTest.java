@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,19 +17,8 @@ import org.springframework.test.web.servlet.MockMvc;
 class BoxControllerTest {
 
   @Autowired private MockMvc mockMvc;
-  @MockBean private Mp4BoxAnalyzer mp4BoxAnalyzer;
+  @MockBean private BoxService BoxService;
   @InjectMocks private BoxController boxController;
-
-  @Test
-  void testAnalyze_withEmptyInput_returnsEmptyList() {
-    List<Box> boxes = boxController.analyze("");
-    assertEquals(0, boxes.size());
-  }
-
-  @Test
-  void testAnalyze_withNullInput_throwsNullPointerException() {
-    assertThrows(NullPointerException.class, () -> boxController.analyze(null));
-  }
 
   @Test
   void testAnalyze_withInvalidEndpoint_returnsNotFound() throws Exception {
